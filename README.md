@@ -1,4 +1,4 @@
-# qwinterface_pytest（For study use only）
+# qwcontact_interface_pytest（For study use only）
 
 注意：
 在本地调用企微通讯录管理接口前，需要配置API编辑通讯录权限，并将本地ip加入企业可信ip。

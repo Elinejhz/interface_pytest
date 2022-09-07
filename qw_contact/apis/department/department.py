@@ -16,10 +16,11 @@ class Department(WeWork):
         yaml_data = Utils.get_yaml_data(path)
         corpid = yaml_data.get("corpid").get("yinian")
         secret = yaml_data.get("secret").get("contact")
-        _env = os.getenv("test_env")
+        # _env = os.getenv("test_env")
+        _env = "prod"
         self.BASE_URL = yaml_data.get(_env).get("BASE_URL")
         self.get_token(corpid, secret)
-        _env = os.getenv("test_env")
+        # _env = os.getenv("test_env")
 
     def create(self, data):
         '''
@@ -95,14 +96,39 @@ class Department(WeWork):
         r = self.send_api(req)
         # 返回请求得到的结果
         return r
-
-    def get(self, _id=None):
+    # 获取单个部门信息
+    def get_simple(self, _id=None):
         '''
         获取部门信息
         :return:
         '''
         # 定义获取列表url
-        get_list_url = "/department/list"
+        get_list_url = "/department/simplelist"
+        # 定义请求参数
+        params = {
+            "access_token": self.access_token,
+            "id": _id
+        }
+
+        # 组装调用send的参数
+        req = {
+            "method": "GET",
+            "url": get_list_url,
+            "params": params
+        }
+        # 发起请求
+        # r = requests.request("GET", url=get_list_url, params=params)
+        r = self.send_api(req)
+        # 返回请求得到的结果
+        return r
+
+    def get_get(self, _id):
+        '''
+        获取部门信息
+        :return:
+        '''
+        # 定义获取列表url
+        get_list_url = "/department/get"
         # 定义请求参数
         params = {
             "access_token": self.access_token,
